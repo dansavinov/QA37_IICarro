@@ -3,6 +3,10 @@ package manager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class HelperUser extends HelperBase {
     public HelperUser(WebDriver wd) {
@@ -45,5 +49,22 @@ public class HelperUser extends HelperBase {
     public void logout() {
         click(By.xpath("//a[normalize-space()='Logout']"));
         wd.navigate().to("https://ilcarro.web.app/search");
+    }
+
+    public boolean isPasswordWrong() {
+        return isElementPresent(By.cssSelector(".positive-button"));
+    }
+    public String getMessage() {
+
+        //  WebDriverWait wait = new WebDriverWait(wd, Duration.ofSeconds(5));
+        //   wait.until(ExpectedConditions.visibilityOf(wd.findElement(By.cssSelector(".dialog-container>2"))));
+        return wd.findElement(By.cssSelector(".dialog-container>h2")).getText();
+    }
+
+
+
+
+    public void closeWindow() {
+        click(By.xpath("//button[text()='Ok']"));
     }
 }
